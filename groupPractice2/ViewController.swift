@@ -31,7 +31,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             //this is great, it loaded our stuff
             
         } else {
-            
+
             var kori = Person(fName: "Kori", lName: "Kolo")
             var brian = Person(fName: "Brian", lName: "Mendez")
             
@@ -92,3 +92,4 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 //    sectionIndexTitlesForTableView(<#tableView: UITableView!#>)
     
 }
+//test test
