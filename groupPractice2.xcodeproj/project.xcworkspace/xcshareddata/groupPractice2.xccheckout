@@ -12,22 +12,42 @@
 	<dict>
 		<key>6F98E83261211E095E81788110B21FBEEA8517B1</key>
 		<string>https://github.com/brmendez/F2iOSHW3.git</string>
+		<key>E3D1B89519CAA69A82181FC659049D966072AA73</key>
+		<string>https://github.com/brmendez/ClassRoster5.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>groupPractice2.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>6F98E83261211E095E81788110B21FBEEA8517B1</key>
-		<string>../..</string>
+		<string>../../../F2iOSHW3</string>
+		<key>E3D1B89519CAA69A82181FC659049D966072AA73</key>
+		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/brmendez/F2iOSHW3.git</string>
+	<string>https://github.com/brmendez/ClassRoster5.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>6F98E83261211E095E81788110B21FBEEA8517B1</string>
+	<string>E3D1B89519CAA69A82181FC659049D966072AA73</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E3D1B89519CAA69A82181FC659049D966072AA73</string>
+			<key>IDESourceControlWCCName</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E3D1B89519CAA69A82181FC659049D966072AA73</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ClassRoster5</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

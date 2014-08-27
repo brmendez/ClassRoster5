@@ -10,7 +10,6 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    
     @IBOutlet weak var tableView: UITableView!
 
     var teacherArray = [Person]()
@@ -93,4 +92,3 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 //    sectionIndexTitlesForTableView(<#tableView: UITableView!#>)
     
 }
-
