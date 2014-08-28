@@ -17,27 +17,36 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     @IBOutlet weak var lastNameTextField: UITextField!
 
 //MARK: Life cycle methods
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.profileImage.layer.cornerRadius = 100
+        self.profileImage.contentMode = UIViewContentMode.ScaleToFill
+        self.profileImage.clipsToBounds = true
+        self.profileImage.image = self.personSegue.image
+        
+        
+        if profileImage.image == nil{
+            println("no picture")
+            self.profileImage.image = UIImage(named: "silhouette_m_300")
+            
+        }
+        
+    }
+    
+//    override func viewWillLayoutSubviews() {
+//        self.profileImage.layer.cornerRadius = self.profileImage.frame.width / 2
+//        self.profileImage.clipsToBounds = true
+//    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
         self.firstNameTextField.text = self.personSegue.firstName
         self.lastNameTextField.text = self.personSegue.lastName
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.profileImage.layer.cornerRadius = self.profileImage.frame.size.height/2
-        self.profileImage.contentMode = UIViewContentMode.ScaleToFill
-        self.profileImage.clipsToBounds = true
         self.profileImage.image = self.personSegue.image
-        
-        if profileImage.image == nil{
-            println("no picture")
-            self.profileImage.image = UIImage(named: "turtleDefault.jpg")
-            
-        }
-
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -68,7 +77,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         
         imagePickerController.delegate = self
         //checks for camera
-        imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        imagePickerController.sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum
         imagePickerController.allowsEditing = true
         
         //shows camera view
@@ -80,6 +89,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         var editedImage = info[UIImagePickerControllerEditedImage] as UIImage
         self.personSegue.image = editedImage
         self.profileImage.image = editedImage
+        
         
         picker.dismissViewControllerAnimated(true, completion: nil)
     }

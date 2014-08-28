@@ -15,27 +15,35 @@ class Person  : NSObject, NSCoding {
     var image : UIImage?
     
     
-    init (fName: String, lName: String){
-        self.firstName = fName
-        self.lastName = lName
-        super.init()
+init (fName: String, lName: String){
+    self.firstName = fName
+    self.lastName = lName
+    super.init()
+}
+    
+func encodeWithCoder(aCoder: NSCoder!) {
+    aCoder.encodeObject(self.firstName, forKey: "firstName")
+    aCoder.encodeObject(self.lastName, forKey: "lastName")
+    
+//just added this, uncomment below aCoder if not working.
+    if self.image != nil {
+        aCoder.encodeObject(self.image!, forKey: "image")
     }
     
-    func encodeWithCoder(aCoder: NSCoder!) {
-        aCoder.encodeObject(self.firstName, forKey: "firstName")
-        aCoder.encodeObject(self.lastName, forKey: "lastName")
-        //        aCoder.encodeObject(self.image!, forKey: "image")
-    }
+//aCoder.encodeObject(self.image, forKey: "image")
+}
     
-    required init(coder aDecoder: NSCoder) {
-        //super.init()
-        self.firstName = aDecoder.decodeObjectForKey("firstName") as String
-        self.lastName = aDecoder.decodeObjectForKey("lastName") as String
-//        self.image = aDecoder.decodeObjectForKey("image") as? UIImage
+    //must be NSCoding compliant
+required init(coder aDecoder: NSCoder) {
+    self.firstName = aDecoder.decodeObjectForKey("firstName") as String
+    self.lastName = aDecoder.decodeObjectForKey("lastName") as String
+    if let image = aDecoder.decodeObjectForKey("image") as? UIImage {
+        self.image = image
     }
+}
     
-    func fullName() -> String {
-        return self.firstName + " " + self.lastName
+func fullName() -> String {
+    return self.firstName + " " + self.lastName
     }
 }
 

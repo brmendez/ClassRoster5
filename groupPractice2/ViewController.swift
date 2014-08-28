@@ -24,7 +24,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
     
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-    
         if let people = NSKeyedUnarchiver.unarchiveObjectWithFile(documentsPath + "/archive") as? [[Person]] {
             
             self.allArrays = people
@@ -42,6 +41,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             teacherArray = [brad, john]
             allArrays = [personArray, teacherArray]
          
+            
         NSKeyedArchiver.archiveRootObject(allArrays, toFile: documentsPath + "/archive")
             //not great, or this is the first time they launched.
         }
@@ -53,9 +53,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewWillAppear(animated)
         
     let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-        
         var people = NSKeyedArchiver.archiveRootObject(allArrays, toFile: documentsPath + "/archive")
-        
         tableView.reloadData()
     }
     
@@ -73,9 +71,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return sectionsArray[section]
     }
     
+    func tableView(tableView: UITableView!, canEditRowAtIndexPath indexPath: NSIndexPath!) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
+        if editingStyle == .Delete {
+            allArrays[indexPath.section].removeAtIndex(indexPath!.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        }
+    }
+    
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
         cell.imageView.image = allArrays[indexPath.section][indexPath.row].image
+    
         cell.textLabel.text = allArrays[indexPath.section][indexPath.row].fullName()
         self.preProfile = allArrays[indexPath.section][indexPath.row]
         return cell
