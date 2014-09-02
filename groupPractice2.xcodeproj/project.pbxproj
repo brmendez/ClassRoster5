@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		191579AD19AEE3940023B4A8 /* silhouette_m_300.png in Resources */ = {isa = PBXBuildFile; fileRef = 191579AC19AEE3930023B4A8 /* silhouette_m_300.png */; };
+		191579AD19AEE3940023B4A8 /* placeHolder.png in Resources */ = {isa = PBXBuildFile; fileRef = 191579AC19AEE3930023B4A8 /* placeHolder.png */; };
+		19241B8519B568FB0033E50D /* github.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 19241B8419B568FB0033E50D /* github.jpg */; };
 		19DB6B7319A1673E0094A08A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DB6B7219A1673E0094A08A /* AppDelegate.swift */; };
 		19DB6B7519A1673E0094A08A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DB6B7419A1673E0094A08A /* ViewController.swift */; };
 		19DB6B7819A1673E0094A08A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19DB6B7619A1673E0094A08A /* Main.storyboard */; };
@@ -28,7 +29,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		191579AC19AEE3930023B4A8 /* silhouette_m_300.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = silhouette_m_300.png; sourceTree = "<group>"; };
+		191579AC19AEE3930023B4A8 /* placeHolder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeHolder.png; sourceTree = "<group>"; };
+		19241B8419B568FB0033E50D /* github.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = github.jpg; path = ../../../../../github.jpg; sourceTree = "<group>"; };
 		19DB6B6D19A1673E0094A08A /* groupPractice2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = groupPractice2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19DB6B7119A1673E0094A08A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19DB6B7219A1673E0094A08A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -87,7 +89,8 @@
 				19DB6B8F19A168F00094A08A /* Person.swift */,
 				19DB6B7619A1673E0094A08A /* Main.storyboard */,
 				19DB6B7919A1673F0094A08A /* Images.xcassets */,
-				191579AC19AEE3930023B4A8 /* silhouette_m_300.png */,
+				19241B8419B568FB0033E50D /* github.jpg */,
+				191579AC19AEE3930023B4A8 /* placeHolder.png */,
 				19DB6B7019A1673E0094A08A /* Supporting Files */,
 			);
 			path = groupPractice2;
@@ -198,9 +201,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19241B8519B568FB0033E50D /* github.jpg in Resources */,
 				19DB6B7819A1673E0094A08A /* Main.storyboard in Resources */,
 				19DB6B7A19A1673F0094A08A /* Images.xcassets in Resources */,
-				191579AD19AEE3940023B4A8 /* silhouette_m_300.png in Resources */,
+				191579AD19AEE3940023B4A8 /* placeHolder.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
