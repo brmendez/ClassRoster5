@@ -63,7 +63,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     }
     
     
-//    MARK: Camera
+//MARK: Camera
     @IBAction func selectPicture(sender: AnyObject) {
         self.revealCamera()
     }
