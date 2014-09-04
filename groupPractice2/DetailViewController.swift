@@ -10,7 +10,7 @@ import UIKit
 
 class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate,  UINavigationControllerDelegate, UIAlertViewDelegate {
     
-    var personSegue : Person!
+    var personProfile : Person!
     var imageQueue = NSOperationQueue()
     
     @IBOutlet weak var profileImage: UIImageView!
@@ -27,15 +27,15 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         self.profileImage.layer.cornerRadius = 100
         self.profileImage.contentMode = UIViewContentMode.ScaleToFill
         self.profileImage.clipsToBounds = true
-        if self.personSegue?.image != nil {
-            self.profileImage.image = self.personSegue?.image
+        if self.personProfile?.image != nil {
+            self.profileImage.image = self.personProfile?.image
         }
         else {
             self.profileImage.image = UIImage(named: "placeHolder")
         }
         
-        if self.personSegue?.gitHubPhoto != nil {
-            self.gitHubPhotoImageView.image = self.personSegue?.gitHubPhoto
+        if self.personProfile?.gitHubPhoto != nil {
+            self.gitHubPhotoImageView.image = self.personProfile?.gitHubPhoto
         }
         else {
             self.gitHubPhotoImageView.image = UIImage(named: "github.jpg")
@@ -44,14 +44,14 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.firstNameTextField.text = self.personSegue.firstName
-        self.lastNameTextField.text = self.personSegue.lastName
-        self.gitHubUserNameTextField.text = self.personSegue!.gitHubUserName
+        self.firstNameTextField.text = self.personProfile.firstName
+        self.lastNameTextField.text = self.personProfile.lastName
+        self.gitHubUserNameTextField.text = self.personProfile!.gitHubUserName
     }
     override func viewWillDisappear(animated: Bool) {
-        self.personSegue.firstName = self.firstNameTextField.text
-        self.personSegue.lastName = self.lastNameTextField.text
-        self.personSegue!.gitHubUserName = self.gitHubUserNameTextField.text
+        self.personProfile.firstName = self.firstNameTextField.text
+        self.personProfile.lastName = self.lastNameTextField.text
+        self.personProfile!.gitHubUserName = self.gitHubUserNameTextField.text
        
     }
 
@@ -86,7 +86,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
 //MARK: Image Picker
     func imagePickerController(picker: UIImagePickerController!, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]!) {
         var editedImage = info[UIImagePickerControllerEditedImage] as UIImage
-        self.personSegue.image = editedImage
+        self.personProfile.image = editedImage
         self.profileImage.image = editedImage
         
         picker.dismissViewControllerAnimated(true, completion: nil)
@@ -109,7 +109,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         typeGitHubName.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler:nil))
         typeGitHubName.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
             self.gitHubUserNameTextField.text = alertTextField.text
-            self.personSegue.gitHubUserName = alertTextField.text
+            self.personProfile.gitHubUserName = alertTextField.text
             self.gitHubProfilePicture(alertTextField.text)
         })
         self.presentViewController(typeGitHubName, animated: true, completion: nil)
@@ -140,7 +140,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
                 
                 NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                     self.gitHubPhotoImageView.image = profilePhotoImage
-                    self.personSegue!.gitHubPhoto = profilePhotoImage
+                    self.personProfile!.gitHubPhoto = profilePhotoImage
                 })
             })
             task.resume()

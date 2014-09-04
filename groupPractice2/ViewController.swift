@@ -52,7 +52,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
          
             
         NSKeyedArchiver.archiveRootObject(allArrays, toFile: documentsPath + "\(archive)")
-            //not great, or this is the first time they launched.
+            // not great, or this is the first time they launched.
         }
     
     }
@@ -71,7 +71,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-//        println(self.numberOfSectionCounter++)
         return allArrays[section].count
     }
     
@@ -81,7 +80,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView!, canEditRowAtIndexPath indexPath: NSIndexPath!) -> Bool{
-        
         return true
     }
     
@@ -113,14 +111,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let indexPath = self.tableView.indexPathForSelectedRow()
         if segue.identifier == "showDetail" {
         let destination = segue.destinationViewController as DetailViewController
-        destination.personSegue = allArrays[indexPath.section][indexPath.row]
+        destination.personProfile = allArrays[indexPath.section][indexPath.row]
         }
         if segue.identifier == "addNewPerson" {
             let destination = segue.destinationViewController as DetailViewController
-            destination.personSegue = Person(fName: " ", lName: " ")
-            personArray.append(destination.personSegue)
+            destination.personProfile = Person(fName: " ", lName: " ")
+//created students typeArray gave it value of personArray
             var students = self.allArrays[0] as [Person]
-            students.append(destination.personSegue!)
+            students.append(destination.personProfile!)
             self.allArrays[0] = students
         }
     }
