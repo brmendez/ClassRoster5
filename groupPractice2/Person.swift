@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class Person  : NSObject, NSCoding {
+class Person : NSObject, NSCoding {
     var firstName : String
     var lastName : String
     var image : UIImage?
@@ -41,7 +41,7 @@ init (fName: String, lName: String){
         }
     }
     
-    func encodeWithCoder(aCoder: NSCoder!) {
+    func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(self.firstName, forKey: "firstName")
         aCoder.encodeObject(self.lastName, forKey: "lastName")
         if self.gitHubUserName != nil{
@@ -59,8 +59,4 @@ init (fName: String, lName: String){
         
         //aCoder.encodeObject(self.image, forKey: "image")
     }
-    
-    
 }
-
-

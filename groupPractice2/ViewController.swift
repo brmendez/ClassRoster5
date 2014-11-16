@@ -31,6 +31,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 //MARK: ViewDidLoad - Append
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
     
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
         if let people = NSKeyedUnarchiver.unarchiveObjectWithFile(documentsPath + "\(archive)") as? [[Person]] {
@@ -39,7 +42,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             //this is great, it loaded our stuff
             
         } else {
-
+            
             var kori = Person(fName: "Kori", lName: "Kolo")
             var brian = Person(fName: "Brian", lName: "Mendez")
             
@@ -50,13 +53,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             teacherArray = [brad, john]
             allArrays = [personArray, teacherArray]
          
-            
+//coder, decoder, document path, archive, unarchive
         NSKeyedArchiver.archiveRootObject(allArrays, toFile: documentsPath + "\(archive)")
             // not great, or this is the first time they launched.
         }
-    
     }
-    
     //when transitioning back to ViewController after selecting name
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -70,8 +71,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return self.allArrays.count
     }
 
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        return allArrays[section].count
+//    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+//        return self.allArrays[section].count
+//    }
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.allArrays[section].count
     }
     
 //MARK: TitleForHeader
@@ -97,22 +101,30 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
 //MARK: CellForRow
     
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
-    
-        cell.textLabel.text = allArrays[indexPath.section][indexPath.row].fullName()
+        
+        cell.textLabel?.text = allArrays[indexPath.section][indexPath.row].fullName()
         self.preProfile = allArrays[indexPath.section][indexPath.row]
         return cell
     }
     
+//    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+//        var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
+//    
+//        cell.textLabel!.text = allArrays[indexPath.section][indexPath.row].fullName()
+//        self.preProfile = allArrays[indexPath.section][indexPath.row]
+//        return cell
+//    }
+    
 //MARK: PrepForSegue
     
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         let indexPath = self.tableView.indexPathForSelectedRow()
         if segue.identifier == "showDetail" {
         let destination = segue.destinationViewController as DetailViewController
-        destination.personProfile = allArrays[indexPath.section][indexPath.row]
-        }
+            destination.personProfile = allArrays[indexPath!.section][indexPath!.row]
+               }
         if segue.identifier == "addNewPerson" {
             let destination = segue.destinationViewController as DetailViewController
             destination.personProfile = Person(fName: " ", lName: " ")

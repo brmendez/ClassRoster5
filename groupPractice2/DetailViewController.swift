@@ -13,7 +13,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     var personProfile : Person!
     var imageQueue = NSOperationQueue()
     
-    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var DVCProfileImage: UIImageView!
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var gitHubUserNameTextField: UITextField!
@@ -24,14 +24,14 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.profileImage.layer.cornerRadius = 100
-        self.profileImage.contentMode = UIViewContentMode.ScaleToFill
-        self.profileImage.clipsToBounds = true
+        self.DVCProfileImage.layer.cornerRadius = 100
+        self.DVCProfileImage.contentMode = UIViewContentMode.ScaleToFill
+        self.DVCProfileImage.clipsToBounds = true
         if self.personProfile?.image != nil {
-            self.profileImage.image = self.personProfile?.image
+            self.DVCProfileImage.image = self.personProfile?.image
         }
         else {
-            self.profileImage.image = UIImage(named: "placeHolder")
+            self.DVCProfileImage.image = UIImage(named: "placeHolder")
         }
         
         if self.personProfile?.gitHubPhoto != nil {
@@ -68,7 +68,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         self.revealCamera()
     }
     
-    
+//MARK: Picker Controller
     func revealCamera(){
         var imagePickerController = UIImagePickerController()
         
@@ -87,7 +87,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     func imagePickerController(picker: UIImagePickerController!, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]!) {
         var editedImage = info[UIImagePickerControllerEditedImage] as UIImage
         self.personProfile.image = editedImage
-        self.profileImage.image = editedImage
+        self.DVCProfileImage.image = editedImage
         
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -110,19 +110,19 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         typeGitHubName.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
             self.gitHubUserNameTextField.text = alertTextField.text
             self.personProfile.gitHubUserName = alertTextField.text
-            self.gitHubProfilePicture(alertTextField.text)
+            self.getGitHubProfilePicture(alertTextField.text)
         })
         self.presentViewController(typeGitHubName, animated: true, completion: nil)
     }
     
 //MARK: Github Profile API Call
     
-    func gitHubProfilePicture(userNameGit: String) -> Void {
+    func getGitHubProfilePicture(userNameGit: String) -> Void {
         let githubURL = NSURL(string: "https://api.github.com/users/\(userNameGit)")
         var githubProfilePhotoURL = NSURL()
         self.imageQueue.addOperationWithBlock { () -> Void in
             let session = NSURLSession.sharedSession()
-            let task = session.dataTaskWithURL(githubURL, completionHandler: { (data, response, error) -> Void in
+            let task = session.dataTaskWithURL(githubURL!, completionHandler: { (data, response, error) -> Void in
                 if error != nil {
                     println("Error Report")
                 }
@@ -133,17 +133,20 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
                     println("Error json")
                 }
                 if let avatarURL = jsonResult["avatar_url"] as? String {
-                    githubProfilePhotoURL = NSURL(string: avatarURL)
+                    githubProfilePhotoURL = NSURL(string: avatarURL)!
                 }
                 var profilePhotoData = NSData(contentsOfURL: githubProfilePhotoURL)
-                var profilePhotoImage = UIImage(data: profilePhotoData)
+                var profilePhotoImage = UIImage(data: profilePhotoData!)
                 
                 NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                     self.gitHubPhotoImageView.image = profilePhotoImage
                     self.personProfile!.gitHubPhoto = profilePhotoImage
+                    self.DVCProfileImage.image = profilePhotoImage
                 })
             })
             task.resume()
         }
     }
 }
+
+
